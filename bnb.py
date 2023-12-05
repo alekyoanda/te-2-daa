@@ -25,7 +25,7 @@ def partition_values_from_index(values, start_index,
                 best_err = test_err
                 best_assignment = test_assignment.copy()
 
-                print(best_err)
+                # print(best_err)
 
                 if best_err == 0:
                     return True, best_assignment
