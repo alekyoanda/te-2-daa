@@ -85,6 +85,6 @@ def partition_problem_bnb(S):
 
 # print(partition_problem_bnb(tc))
 
-tc = [5,2,1,4]
+# tc = [5,2,1,4]
 
-print(partition_problem_bnb(tc))
+# print(partition_problem_bnb(tc))

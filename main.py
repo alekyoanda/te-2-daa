@@ -10,7 +10,7 @@ from bnb import partition_problem_bnb
 
 TC_SIZE = [10, 40, 80]
 TOTAL_SUM = [100, 1000, 100000]
-OPTION = ["small", "medium", "large"]
+OPTION = ["small (100)", "medium (1000)", "large (100000)"]
 
 run_time_40 = []
 
@@ -41,6 +41,7 @@ def generate_tc_with_option(size):
         generate_tc(size, i)
 
 def main():
+    # show_graph()
     # generate_tc_with_option(10)
     # generate_tc_with_option(40)
     for size in TC_SIZE:
@@ -87,6 +88,38 @@ def main():
             tracemalloc.stop()
             print('----------------------------------')
 
+def show_graph():
+    size_200_1 = [363392, 3490768, 307906320]
+    size_200_2 = [4804, 5124, 5156]
+
+    max_value = max(max(size_200_1), max(size_200_2))
+
+    dict_200 = {
+        "DP": size_200_1,
+        "BNB": size_200_2
+    }
+    # plot line 
+    x = np.arange(len(OPTION))  # the label locations
+    width = 0.4  # the width of the bars
+    multiplier = 0
+
+    fig, ax = plt.subplots(layout='constrained')
+
+    for attribute, measurement in dict_200.items():
+        offset = width * multiplier
+        rects = ax.bar(x + offset, measurement, width, label=attribute)
+        ax.bar_label(rects, padding=3)
+        multiplier += 1
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_ylabel('Memory Usage (bytes)')
+    ax.set_title(f'Input Size {TC_SIZE[1]}')
+    ax.set_xticks(x + width, OPTION)
+    ax.legend(loc='upper left', ncols=3)
+    ax.set_ylim(0, max_value * 1.1)
+
+    plt.savefig(f'figure/memory_{TC_SIZE[1]}.png')
+    plt.show()
 
 if __name__ == "__main__":
     main()
